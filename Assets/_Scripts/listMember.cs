@@ -1,0 +1,43 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
+using System.Collections;
+
+public class listMember : MonoBehaviour {
+    public GameObject copyGameObject;//要被複製的物件
+    public GameObject superGameObject;//要被放置在哪個物件底下
+    private GameObject[] childGameObject;//被複製出來的物件
+
+    IEnumerator Start() {
+        WWW www = new WWW("http://140.117.71.205/exvisition/listMember.php");
+        yield return www;
+
+        string memberList = www.text;
+        string[] members = memberList.Split(';');
+        childGameObject = new GameObject[members.Length - 1];
+
+        for (int i = 0; i < members.Length - 1; i++) {
+            childGameObject[i] = Instantiate(copyGameObject);//複製copyGameObject物件
+            childGameObject[i].transform.SetParent(superGameObject.transform);//放到superGameObject物件內
+            childGameObject[i].transform.localPosition = new Vector3(0, 200 - 250 * i, 0);//複製出來的物件放置的座標為superGameObject物件內的原點
+            childGameObject[i].transform.localScale = Vector3.one;
+            childGameObject[i].name = members[i]; //將複製出來的子物件重新命名
+
+			string url = string.Concat("http://140.117.71.205/exvisition/img/member/", i, ".png");
+			www = new WWW(url);
+			yield return www;
+
+			Sprite s = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), Vector2.zero);
+            childGameObject[i].GetComponent<Image>().sprite = s;
+
+            childGameObject[i].GetComponent<Image>().color = new Color(1, 1, 1, 255);
+            Button btn = childGameObject[i].GetComponent<Button>();
+            Click(btn, members[i]);
+        }
+        Destroy(copyGameObject);
+    }
+
+    void Click(Button btn, string str) {
+        btn.onClick.AddListener(() => { init.mid = str; });
+    }
+}
