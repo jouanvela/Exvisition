@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 using System.Collections;
 
 public class exhibition : MonoBehaviour {
@@ -9,9 +10,12 @@ public class exhibition : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start() {
 		string url = string.Concat("http://140.117.71.205/exvisition/exhibition.php?eid=", init.eid);
-		print(url);
 		WWW www = new WWW(url);
 		yield return www;
+
+		string path = Application.temporaryCachePath + "/exhibition/" + init.eid;
+		if(!File.Exists(path))
+			Directory.CreateDirectory(path);
 
 		string[] exhibition;
 		exhibition = www.text.Split(';');

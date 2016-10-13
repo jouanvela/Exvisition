@@ -9,12 +9,9 @@ public class listMember : MonoBehaviour {
     private GameObject[] childGameObject;//被複製出來的物件
 
     IEnumerator Start() {
-        WWW www = new WWW("http://140.117.71.205/exvisition/listMember.php");
-        yield return www;
 
-        string memberList = www.text;
-        string[] members = memberList.Split(';');
-        childGameObject = new GameObject[members.Length - 1];
+		string[] members = init.membersList;
+		childGameObject = new GameObject[members.Length - 1];
 
         for (int i = 0; i < members.Length - 1; i++) {
             childGameObject[i] = Instantiate(copyGameObject);//複製copyGameObject物件
@@ -23,8 +20,8 @@ public class listMember : MonoBehaviour {
             childGameObject[i].transform.localScale = Vector3.one;
             childGameObject[i].name = members[i]; //將複製出來的子物件重新命名
 
-			string url = string.Concat("http://140.117.71.205/exvisition/img/member/", i, ".png");
-			www = new WWW(url);
+			string path = "file://" + Application.temporaryCachePath + "/member/" + members[i] + ".png";
+			WWW www = new WWW(path);
 			yield return www;
 
 			Sprite s = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), Vector2.zero);

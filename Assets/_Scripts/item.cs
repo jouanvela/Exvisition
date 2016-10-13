@@ -6,6 +6,7 @@ using System.Collections;
 public class item : MonoBehaviour {
 	public GameObject title;
 	public GameObject description;
+	public GameObject picture;
 	public GameObject audioBtn;
 	public GameObject videoBtn;
 	public AudioSource audioSource;
@@ -25,6 +26,23 @@ public class item : MonoBehaviour {
 		title.GetComponent<Text>().text = item[0];
 		description.GetComponent<Text>().text = item[1];
 
+		//Load Picture
+		if(item[2] == "1"){
+			path = Application.temporaryCachePath + "/exhibition/" + init.eid + "/" + init.iid + ".jpg";
+			if (!File.Exists (path)) {
+				url = string.Concat("http://140.117.71.205/exvisition/img/", init.eid, "/", init.iid, ".jpg");
+				www = new WWW (url);
+				yield return www;
+				File.WriteAllBytes (path, www.bytes);
+			} 
+			else {
+				url = string.Concat("file://" + path);
+				www = new WWW(url);
+				yield return www;
+			}
+			Sprite s = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), Vector2.zero);
+			picture.GetComponent<Image>().sprite = s;
+		}
 
 		//Load Audio
 		if(item[3] == "1"){
