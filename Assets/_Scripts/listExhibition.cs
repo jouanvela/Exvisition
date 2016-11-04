@@ -9,7 +9,7 @@ public class listExhibition : MonoBehaviour {
 
     IEnumerator Start() {
 
-		string url = string.Concat("http://140.117.71.205/exvisition/listExhibition.php?mid=", init.mid);
+		string url = string.Concat(init.mode,"/listExhibition.php?mid=", init.mid);
 		WWW www = new WWW(url);
         yield return www;
 

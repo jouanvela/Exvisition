@@ -18,19 +18,16 @@ public class QRScan : MonoBehaviour {
 		GotoNextScene ("8_Item");
 	}
 
+	public void Load_Exhibition()
+	{
+		GotoNextScene ("5_Exhibition");
+	}
+
 	public void GotoNextScene(string scenename)
 	{
 		if (e_qrController != null) {
 			e_qrController.StopWork();
 		}
 		SceneManager.LoadScene(scenename);
-	}
-
-	public void Load_Exhibition()
-	{
-		if (e_qrController != null) {
-			e_qrController.StopWork();
-		}
-		SceneManager.LoadScene("5_Exhibition");
 	}
 }

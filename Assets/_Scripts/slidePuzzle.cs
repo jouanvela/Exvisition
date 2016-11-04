@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class puzzle : MonoBehaviour 
+public class slidePuzzle : MonoBehaviour 
 {
 	// 拼圖的完成位置
 	private byte[] CompleteLocation;

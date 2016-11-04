@@ -8,8 +8,7 @@ public class member : MonoBehaviour {
 
     // Use this for initialization
     IEnumerator Start() {
-		string url = string.Concat("http://140.117.71.205/exvisition/member.php?mid=", init.mid);
-        print(url);
+		string url = string.Concat(init.mode,"/member.php?mid=", init.mid);
         WWW www = new WWW(url);
         yield return www;
 

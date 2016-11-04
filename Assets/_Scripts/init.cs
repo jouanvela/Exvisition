@@ -11,6 +11,7 @@ public class init : MonoBehaviour {
 	public static string eid = "1";
 	public static string mid = "1";
 	public static string iid = "1";
+	public static string mode = "http://140.117.71.205/exvisition";
 
 	void Awake(){
 		Caching.CleanCache();
@@ -24,13 +25,14 @@ public class init : MonoBehaviour {
 		string url;
 
 		//Member List, and their Logo
-		WWW www = new WWW("http://140.117.71.205/exvisition/listMember.php");
+		url = string.Concat(mode, "/listMember.php");
+		WWW www = new WWW(url);
 		yield return www;
 		membersList = www.text.Split(';');
 		for (int i = 0; i < membersList.Length - 1; i++) {
 			path = Application.temporaryCachePath + "/member/" + membersList[i] + ".png";
 			if (!File.Exists (path)) {
-				url = string.Concat("http://140.117.71.205/exvisition/img/member/", membersList[i], ".png");
+				url = string.Concat(mode,"/img/member/", membersList[i], ".png");
 				www = new WWW (url);
 				yield return www;
 				File.WriteAllBytes (path, www.bytes);
