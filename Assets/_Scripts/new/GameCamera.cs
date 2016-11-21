@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameCamera : MonoBehaviour {
-    float devHeight = 9.6f;
+    //float devHeight = 9.6f;
     float devWidth = 6.4f;
    
 	// Use this for initialization

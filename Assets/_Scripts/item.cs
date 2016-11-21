@@ -10,6 +10,7 @@ public class item : MonoBehaviour {
 	public GameObject picture;
 	public GameObject audioBtn;
 	public GameObject videoBtn;
+	public GameObject gameBtn;
 	public AudioSource audioSource;
 
 	// Use this for initialization

@@ -27,11 +27,10 @@ public class listMember : MonoBehaviour {
 		WWW www = new WWW(path);
 		yield return www;
 		Sprite s = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), Vector2.zero);
-		childGameObject[i].GetComponent<Image>().sprite = s;
+		childGameObject[i].GetComponentsInChildren<Image>()[1].sprite = s;
 
-		childGameObject[i].GetComponent<Image>().color = new Color(1, 1, 1, 255);
 		childGameObject[i].SetActive (true);
-		Button btn = childGameObject[i].GetComponent<Button>();
+		Button btn = childGameObject[i].GetComponentsInChildren<Button>()[0];
 		Click(btn, members[i]);
 	}
 
