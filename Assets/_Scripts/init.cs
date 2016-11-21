@@ -15,8 +15,7 @@ public class init : MonoBehaviour {
 
 	void Awake(){
 		Caching.CleanCache();
-		Directory.CreateDirectory(Application.temporaryCachePath + "/audio/");
-		Directory.CreateDirectory(Application.temporaryCachePath + "/video/");
+		Directory.CreateDirectory(Application.temporaryCachePath + "/item/");
 		Directory.CreateDirectory(Application.temporaryCachePath + "/member/");
 
 	}
