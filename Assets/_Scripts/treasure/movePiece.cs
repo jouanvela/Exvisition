@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Movepiece : MonoBehaviour {
+public class movePiece : MonoBehaviour {
 
-    public string pieceStatus="idle";
-    // Use this for initialization
+    private string pieceStatus="idle";
     Vector2 mousePosition;
-    public check check;
 	
 	// Update is called once per frame
 	void Update () {

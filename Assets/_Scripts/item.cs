@@ -71,7 +71,7 @@ public class item : MonoBehaviour {
 		}
 
 		//Load Video
-		if (item [4] == "1") {			
+		if(item [4] == "1") {			
 			path = Application.temporaryCachePath + "/video/" + init.iid + ".mp4";
 			if (!File.Exists (path)) {
 				url = string.Concat (init.mode,"/video/", init.iid, ".mp4");
@@ -81,9 +81,19 @@ public class item : MonoBehaviour {
 			}
 			videoBtn.GetComponent<Button> ().image.color = Color.green;
 			videoBtn.GetComponent<Button> ().onClick.AddListener (() => {
-				StartCoroutine (playvideo (path));
+				StartCoroutine(playvideo(path));
 			});
 		}
+
+		//Load Game
+		if(item [5] != "") {			
+			gameBtn.GetComponent<Button> ().image.color = Color.yellow;
+			gameBtn.GetComponent<Button> ().onClick.AddListener (() => {
+				playgame(item [5]);
+			});
+		}
+
+
 	}
 
 	void playaudio() {
@@ -96,5 +106,22 @@ public class item : MonoBehaviour {
 	IEnumerator playvideo(string path) {
 		Handheld.PlayFullScreenMovie(path, Color.black, FullScreenMovieControlMode.Full);
 		yield return new WaitForEndOfFrame();
+	}
+
+	void playgame(string type){
+		switch(type){
+			case "puzzle":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+			case "memory":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+			case "mining":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+			case "shooting":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+		}
 	}
 }

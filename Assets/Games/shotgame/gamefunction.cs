@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class gamefunction : MonoBehaviour {
@@ -73,7 +74,7 @@ public class gamefunction : MonoBehaviour {
 	}
 
 	public void ResetGame() {
-		Application.LoadLevel (Application.loadedLevel);
+		SceneManager.LoadScene("1_Home");
 	}
 
 	public void QuitGame() {
