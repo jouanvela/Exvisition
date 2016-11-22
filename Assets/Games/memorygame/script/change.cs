@@ -19,7 +19,6 @@ public class change : MonoBehaviour {
 void Start()
 
     {
-
        
         Screen.orientation = ScreenOrientation.AutoRotation;
 
