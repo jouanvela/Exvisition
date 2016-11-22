@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	public Sprite cardBack;
 	public GameObject[] cards;
 	public Text matchText;
-
+    //public Scene menu;
 	private bool init = false;
 	private int matches = 8;
 		
