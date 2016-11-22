@@ -91,7 +91,7 @@ public class item : MonoBehaviour {
 
 		//Load Game
 		if(item [5] != "") {			
-			gameBtn.GetComponent<Button> ().image.color = Color.yellow;
+			gameBtn.SetActive(true);
 			gameBtn.GetComponent<Button> ().onClick.AddListener (() => {
 				playgame(item [5]);
 			});
