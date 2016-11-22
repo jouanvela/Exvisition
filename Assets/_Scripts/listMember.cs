@@ -19,7 +19,7 @@ public class listMember : MonoBehaviour {
 	IEnumerator image(int i){
 		childGameObject[i] = Instantiate(copyGameObject);//複製copyGameObject物件
 		childGameObject[i].transform.SetParent(superGameObject.transform);//放到superGameObject物件內
-		childGameObject[i].transform.localPosition = new Vector3(0, 200 - 250 * i, 0);//複製出來的物件放置的座標為superGameObject物件內的原點
+		childGameObject[i].transform.localPosition = new Vector3(0, -100 - 250 * i, 0);//複製出來的物件放置的座標為superGameObject物件內的原點
 		childGameObject[i].transform.localScale = Vector3.one;
 		childGameObject[i].name = members[i]; //將複製出來的子物件重新命名
 
