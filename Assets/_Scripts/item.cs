@@ -10,6 +10,7 @@ public class item : MonoBehaviour {
 	public GameObject picture;
 	public GameObject audioBtn;
 	public GameObject videoBtn;
+	public GameObject gameBtn;
 	public AudioSource audioSource;
 
 	// Use this for initialization
@@ -18,6 +19,10 @@ public class item : MonoBehaviour {
 		string path;
 		string[] item; //DataFromDB
 		WWW www;
+
+		path = Application.temporaryCachePath + "/item/" + init.iid;
+		if(!File.Exists(path))
+			Directory.CreateDirectory(path);
 
 		//Load Database
 		url = string.Concat(init.mode,"/item.php?iid=", init.iid);
@@ -31,9 +36,9 @@ public class item : MonoBehaviour {
 
 		//Load Picture
 		if(item[2] == "1"){
-			path = Application.temporaryCachePath + "/exhibition/" + init.eid + "/" + init.iid + ".jpg";
+			path = Application.temporaryCachePath + "/item/" + init.iid + "/picture.jpg";
 			if (!File.Exists (path)) {
-				url = string.Concat(init.mode,"/img/", init.eid, "/", init.iid, ".jpg");
+				url = string.Concat(init.mode,"/item/", init.iid, "/picture.jpg");
 				www = new WWW (url);
 				yield return www;
 				File.WriteAllBytes (path, www.bytes);
@@ -49,9 +54,9 @@ public class item : MonoBehaviour {
 
 		//Load Audio
 		if(item[3] == "1"){
-			path = Application.temporaryCachePath + "/audio/" + init.iid + ".mp3";
+			path = Application.temporaryCachePath + "/item/" + init.iid + "/audio.mp3";
 			if (!File.Exists (path)) {
-				url = string.Concat(init.mode,"/audio/", init.iid, ".mp3");
+				url = string.Concat(init.mode,"/item/", init.iid, "/audio.mp3");
 				www = new WWW (url);
 				yield return www;
 				File.WriteAllBytes (path, www.bytes);
@@ -63,26 +68,36 @@ public class item : MonoBehaviour {
 			}
 			audioSource = audioSource.GetComponent<AudioSource>();
 			audioSource.clip = www.audioClip;
-			audioBtn.GetComponent<Button>().image.color = Color.red;
+			audioBtn.SetActive(true);
 			audioBtn.GetComponent<Button>().onClick.AddListener(() => {
 				playaudio();
 			});
 		}
 
 		//Load Video
-		if (item [4] == "1") {			
-			path = Application.temporaryCachePath + "/video/" + init.iid + ".mp4";
+		if(item [4] == "1") {			
+			path = Application.temporaryCachePath + "/item/" + init.iid + "/video.mp4";
 			if (!File.Exists (path)) {
-				url = string.Concat (init.mode,"/video/", init.iid, ".mp4");
+				url = string.Concat (init.mode,"/item/", init.iid, "/video.mp4");
 				www = new WWW (url);
 				yield return www;
 				File.WriteAllBytes (path, www.bytes);
 			}
-			videoBtn.GetComponent<Button> ().image.color = Color.green;
+			videoBtn.SetActive(true);
 			videoBtn.GetComponent<Button> ().onClick.AddListener (() => {
-				StartCoroutine (playvideo (path));
+				StartCoroutine(playvideo(path));
 			});
 		}
+
+		//Load Game
+		if(item [5] != "") {			
+			gameBtn.GetComponent<Button> ().image.color = Color.yellow;
+			gameBtn.GetComponent<Button> ().onClick.AddListener (() => {
+				playgame(item [5]);
+			});
+		}
+
+
 	}
 
 	void playaudio() {
@@ -95,5 +110,25 @@ public class item : MonoBehaviour {
 	IEnumerator playvideo(string path) {
 		Handheld.PlayFullScreenMovie(path, Color.black, FullScreenMovieControlMode.Full);
 		yield return new WaitForEndOfFrame();
+	}
+
+	void playgame(string type){
+		switch(type){
+			case "puzzle":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+			case "memory":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+			case "mining":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+			case "shooting":
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+			default:
+				SceneManager.LoadScene("Game_SlidePuzzle");
+				break;
+		}
 	}
 }

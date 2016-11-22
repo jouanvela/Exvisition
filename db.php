@@ -3,8 +3,8 @@
 	//資料庫資訊
 	$dbhost		='127.0.0.1';
 	$dbname		='exvisition';
-	$dbuser		='root';
-	$dbpassword	='0000';
+	$dbuser		='';
+	$dbpassword	='';
 
 
 	// 連接資料庫的的設定,預設將 set name utf8 開啟

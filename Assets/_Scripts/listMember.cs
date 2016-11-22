@@ -19,7 +19,7 @@ public class listMember : MonoBehaviour {
 	IEnumerator image(int i){
 		childGameObject[i] = Instantiate(copyGameObject);//複製copyGameObject物件
 		childGameObject[i].transform.SetParent(superGameObject.transform);//放到superGameObject物件內
-		childGameObject[i].transform.localPosition = new Vector3(0, 200 - 250 * i, 0);//複製出來的物件放置的座標為superGameObject物件內的原點
+		childGameObject[i].transform.localPosition = new Vector3(0, -100 - 250 * i, 0);//複製出來的物件放置的座標為superGameObject物件內的原點
 		childGameObject[i].transform.localScale = Vector3.one;
 		childGameObject[i].name = members[i]; //將複製出來的子物件重新命名
 
@@ -27,11 +27,10 @@ public class listMember : MonoBehaviour {
 		WWW www = new WWW(path);
 		yield return www;
 		Sprite s = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), Vector2.zero);
-		childGameObject[i].GetComponent<Image>().sprite = s;
+		childGameObject[i].GetComponentsInChildren<Image>()[1].sprite = s;
 
-		childGameObject[i].GetComponent<Image>().color = new Color(1, 1, 1, 255);
 		childGameObject[i].SetActive (true);
-		Button btn = childGameObject[i].GetComponent<Button>();
+		Button btn = childGameObject[i].GetComponentsInChildren<Button>()[0];
 		Click(btn, members[i]);
 	}
 

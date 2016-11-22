@@ -13,10 +13,6 @@ public class exhibition : MonoBehaviour {
 		WWW www = new WWW(url);
 		yield return www;
 
-		string path = Application.temporaryCachePath + "/exhibition/" + init.eid;
-		if(!File.Exists(path))
-			Directory.CreateDirectory(path);
-
 		string[] exhibition;
 		exhibition = www.text.Split(';');
 		title.GetComponent<Text>().text = exhibition[0];
